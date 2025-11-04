@@ -34,7 +34,13 @@ def normalize_url(base, href): # takes a base url and a hyperlink and returns a 
 
 def extract_links(html,base):
      
-     return
+     soup = BeautifulSoup(html, "html.parser")
+     links = set()
+     for a in soup.find_all('a', href=True):
+         u = normalize_url(base, a["href"])
+         if u:
+              links.add(u)
+     return links
 
 def crawl():
      
