@@ -42,8 +42,10 @@ def extract_links(html,base):
               links.add(u)
      return links
 
-def crawl():
-     
+def crawl(start_url, max_pages=100, delay=0.2):
+     """
+     breadth first crawler
+     """
      return
 
 def main():
