@@ -28,8 +28,7 @@ This repository is my technical portfolio — showcasing hands-on projects, cust
 
 ## 📈 Roadmap
 - [ ] Nuclei Runbook (demo infra)
-- [ ] VulnVerse Endpoint Crawler
-- [ ] CVE Tracker using NVD API
+- [ ] VulnVerse Crawler
 - [ ] Portfolio dashboard for vulnerability visualization
 - [ ] Detection Rule Repository (Sigma/YARA)
 
@@ -37,13 +36,13 @@ This repository is my technical portfolio — showcasing hands-on projects, cust
 
 ## 🧑‍💻 Featured Projects
 <!-->
-### 🔹 VulnLab Endpoint Crawler
+### 🔹 vulnverse Endpoint Crawler
 Python tool for endpoint enumeration and data extraction from sample targets (e.g., `samplecorp.com`).  
 Automates crawling and categorization of live endpoints for vulnerability scanning pipelines.  
-[View Project →](./automation-scripts/vulnlab-endpoint-crawler)
+[View Project →](./automation-scripts/theCrawler)
 
 ### 🔹 Nuclei Pond Runbook
-Runbook for automated scanning of domains using Nuclei templates and  scanning instances.  
+Runbook for automated scanning of domains using Nuclei templates and scanning instances.  
 [View Runbook →](./automation-scripts/nuclei-pond-runbook)
 
 ### 🔹 SSRF Case Study — SampleCorp
