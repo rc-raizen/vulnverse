@@ -1,17 +1,4 @@
 #!/usr/bin/env python3
-"""
-lightweight endpoint crawler script 
-
-
-- Synchronous, single-worker
-- Uses requests + BeautifulSoup
-- Only follows same-host links
-- Outputs a simple JSON file with discovered paths
-- Small and readable so you can step through every line
-
-Usage:
-    python theCrawler.py --target samplecorp.com --output crawl_basic.json --max-pages 50
-"""
 
 import argparse
 import json
