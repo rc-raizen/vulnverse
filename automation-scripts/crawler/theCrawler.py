@@ -2,6 +2,7 @@
 """
 Bare-bones endpoint crawler script 
 
+
 - Synchronous, single-worker
 - Uses requests + BeautifulSoup
 - Only follows same-host links
