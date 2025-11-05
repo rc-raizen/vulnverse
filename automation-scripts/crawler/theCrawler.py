@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Bare-bones endpoint crawler script 
+lightweight endpoint crawler script 
+
 
 - Synchronous, single-worker
 - Uses requests + BeautifulSoup
@@ -9,7 +10,7 @@ Bare-bones endpoint crawler script
 - Small and readable so you can step through every line
 
 Usage:
-    python bare_crawler.py --target samplecorp.com --output crawl_basic.json --max-pages 50
+    python theCrawler.py --target samplecorp.com --output crawl_basic.json --max-pages 50
 """
 
 import argparse
