@@ -17,11 +17,11 @@ This repository is my technical portfolio — showcasing hands-on projects, cust
 ## 📂 Repository Overview
 | Folder | Description |
 |--------|-------------|
-| `/automation-scripts` | Tools for scanning, analysis, and reporting |
-| `/vulnerability-research` | Case studies & writeups (sample domains used) |
-| `/nuclei-templates` | Custom templates for domain-specific vulnerabilities |
-| `/ctf-writeups` | Capture the Flag challenges and solution writeups |
-| `/blue-team-analysis` | Detection rules, log parsing scripts, and hunt notes |
+| `/automation_scripts` | Tools for scanning, analysis, and reporting |
+| `/vulnerability_research` | Case studies & writeups (sample domains used) |
+| `/nuclei_templates` | Custom templates for domain-specific vulnerabilities |
+| `/ctf_writeups` | Capture the Flag challenges and solution writeups |
+| `/blue_team_analysis` | Detection rules, log parsing scripts, and hunt notes |
 | `/docs` | Roadmaps, summaries, and supporting docs |
 
 ---
@@ -39,12 +39,12 @@ This repository is my technical portfolio — showcasing hands-on projects, cust
 ### 🔹 vulnverse Endpoint Crawler
 Python tool for endpoint enumeration and data extraction from sample targets (e.g., `samplecorp.com`).  
 Automates crawling and categorization of live endpoints for vulnerability scanning pipelines.  
-[View Project →](./automation-scripts/theCrawler)
+[View Project →](./automation_scripts/the_crawler)
 
 ### 🔹 Nuclei Pond Runbook
 Runbook for automated scanning of domains using Nuclei templates and scanning instances.  
-[View Runbook →](./automation-scripts/nuclei-pond-runbook)
+[View Runbook →](./automation_scripts/nuclei-pond-runbook)
 
 ### 🔹 SSRF Case Study — SampleCorp
 Case study analyzing an SSRF-like issue on `samplecorp.com`, with CVSS scoring, PoC, and remediations.  
-[View Analysis →](./vulnerability-research/ssrf-case-study-samplecorp)
+[View Analysis →](./vulnerability_research/ssrf-case-study-samplecorp)
