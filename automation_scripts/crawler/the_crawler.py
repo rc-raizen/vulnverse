@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 from collections import deque
 
-USER_AGENT = "theCrawler/0.1 (learn)"
+USER_AGENT = "the_crawler/0.1 (learn)"
 
 def normalize_url(base, href): # takes a base url and a hyperlink and returns a clean url
 
@@ -102,10 +102,10 @@ def main():
     """
     Handles command-line arguments and runs the crawler.
     Example:
-        python3 theCrawler.py --target samplecorp.com --output crawl_basic.json
+        python3 the_crawler.py --target theCruller.com --output crawl_basic.json
     """
     p = argparse.ArgumentParser()
-    p.add_argument("--target", required=True, help="Domain or URL (e.g. samplecorp.com or https://samplecorp.com)")
+    p.add_argument("--target", required=True, help="Domain or URL (e.g. theCruller.com or https://theCruller.com)")
     p.add_argument("--output", default="crawl_basic.json", help="Output JSON filename")
     p.add_argument("--max-pages", type=int, default=50, help="Limit number of pages to crawl")
     args = p.parse_args()
