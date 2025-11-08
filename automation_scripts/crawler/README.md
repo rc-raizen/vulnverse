@@ -1,4 +1,4 @@
-# vulnverse theCrawler v1
+# vulnverse the_crawler v1
 
 A basic, endpoint crawler for authorized testing. Created as a skeleton to continuosly improve overtime with feature additions and adjustments. 
 
@@ -12,7 +12,7 @@ A basic, endpoint crawler for authorized testing. Created as a skeleton to conti
 
 ## Usage 
 ```bash 
-python theCrawler.py \
+python the_crawler.py \
     --target https://theCruller.com \
     --output crawler_result.json
     --max-pages 3
