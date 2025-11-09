@@ -1,5 +1,5 @@
 import types 
-from automation_scripts.crawler.the_crawler import normalize_url, extract_links
+from src.vv_crawler.the_crawler import normalize_url, extract_links
 
 def test_normalize_url():
 

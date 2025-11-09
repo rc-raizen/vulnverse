@@ -1,50 +1,58 @@
-# 👋 Hi, I'm rc-raizen
-**Vulnerability Analyst | Cybersecurity Researcher | Automation Developer**
+# vulnverse the_crawler v1
 
-This repository is my technical portfolio — showcasing hands-on projects, custom tools, and research related to vulnerability analysis, scanning automation, and security reporting. All example domains are synthetic and used for educational/demo purposes.
+A basic, endpoint crawler for authorized testing. Created as a skeleton to continuosly improve overtime with feature additions and adjustments. 
 
----
+## Features
 
-## 🧰 Technical Focus Areas
-- Vulnerability discovery & exploitation (web & infra)
-- Automated scanning & Nuclei template development
-- Threat detection & reporting (MITRE ATT&CK, CVSS)
-- Scripting & tooling (Python, Bash, PowerShell)
-- DevSecOps integration (GitHub Actions, CI/CD Security)
+- **URL Normalization** to return a clean url from hyperlinks
+- **HTML Page Parser** to find all links and return absolute urls
+- **Breadth-First Crawling** to visit pages, extract links and save results
+- **JSON output** for easy readability
+- Optional **Rate Limiting** for setting max pages 
 
----
+## Usage 
+```bash 
+python the_crawler.py \
+    --target https://theCruller.com \
+    --output crawler_result.json
+    --max-pages 3
+```
 
-## 📂 Repository Overview
-| Folder | Description |
-|--------|-------------|
-| `/automation_scripts` | Tools for scanning, analysis, and reporting |
-| `/vulnerability_research` | Case studies & writeups (sample domains used) |
-| `/nuclei_templates` | Custom templates for domain-specific vulnerabilities |
-| `/ctf_writeups` | Capture the Flag challenges and solution writeups |
-| `/blue_team_analysis` | Detection rules, log parsing scripts, and hunt notes |
-| `/docs` | Roadmaps, summaries, and supporting docs |
+### Common Flags
+- `--target` : URL or domain to crawl (http/https)
+- `--output` : JSON file path 
+- `--max-pages` : Limit number of pages to crawl
 
----
+## Output 
+``` json
+{
+  "base": "https://theCruller.com",
+  "discovered": {
+    "/": [
+      {
+        "status": 200,
+        "links_found": 2
+      }
+    ],
+    "/events": [
+      {
+        "status": 200,
+        "links_found": 4
+      }
+    ],
+    "/education": [
+      {
+        "status": 200,
+        "links_found": 7
+      }
+    ]
+},
+"summary": {
+    "pages_crawled": 3,
+    "max_pages": 3
+  }
+}
+```
 
-## 📈 Roadmap
-- [ ] Nuclei Runbook (demo infra)
-- [ ] VulnVerse Crawler
-- [ ] Portfolio dashboard for vulnerability visualization
-- [ ] Detection Rule Repository (Sigma/YARA)
-
----
-
-## 🧑‍💻 Featured Projects
-<!-->
-### 🔹 vulnverse Endpoint Crawler
-Python tool for endpoint enumeration and data extraction from sample targets (e.g., `samplecorp.com`).  
-Automates crawling and categorization of live endpoints for vulnerability scanning pipelines.  
-[View Project →](./automation_scripts/the_crawler)
-
-### 🔹 Nuclei Pond Runbook
-Runbook for automated scanning of domains using Nuclei templates and scanning instances.  
-[View Runbook →](./automation_scripts/nuclei-pond-runbook)
-
-### 🔹 SSRF Case Study — SampleCorp
-Case study analyzing an SSRF-like issue on `samplecorp.com`, with CVSS scoring, PoC, and remediations.  
-[View Analysis →](./vulnerability_research/ssrf-case-study-samplecorp)
+## Legal
+Use **only** with explicit written authorization. Defaults are conservative.
