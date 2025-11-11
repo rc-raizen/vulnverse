@@ -3,8 +3,10 @@
 import argparse
 import json
 import time
-from urllib.parse import urljoin, urlparse
+import re
 import requests
+from pathlib import Path
+from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 from collections import deque
 
@@ -29,8 +31,36 @@ def extract_links(html,base):
               links.add(u)
      return links
 
-def crawl(start_url, max_pages=100, delay=0.2):
+def load_allowlist(scope_file: str | None) -> list[re.Pattern]:
+     """
+     Load allowlist regex patterns. Blank lines and lines starting with # are ignored"""
+     patterns: list [re.Pattern] = []
+     if not scope_file:
+          return patterns
+     p = Path(scope_file)
+     if not p.exists():
+          raise FileNotFoundError(f"Scope file not found: {scope_file}")
+     for line in p.read_text(encoding="utf-8").splitlines():
+          s = line.strip()
+          if not s or s.startswith('#'):
+               continue
+          try:
+              patterns.append(re.compile(s))
+          except re.error as e:
+               print(f"Invalid regex in scope file: {s!r} ({e})")
+     return patterns
+
+def in_scope(url: str, allowlist: list[re.Pattern]) -> bool:
+    """
+    Returns true if URL matches any paterns in the allowlist. If list is empty, default policy used.
+    """
+    if not allowlist:
+         return True
+    return any(rx.search(url) for rx in allowlist)
      
+def crawl(start_url, max_pages=100, delay=0.2, debug=False, allowlist=None):
+     if allowlist is None:
+          allowlist = []     
      """
      breadth first crawler
      """
@@ -69,17 +99,23 @@ def crawl(start_url, max_pages=100, delay=0.2):
                # Keep only internal (same-host) links — don't crawl external domains
                internal = {l for l in links if urlparse(l).netloc == base_netloc}
 
+               # provided scope allowlist filter
+               scoped = {l for l in internal if in_scope(l, allowlist)}
+
+
                # Record metadata for this page: status + number of internal links found
                results["discovered"].setdefault(path, []).append({
                 "status": resp.status_code,
-                "links_found": len(internal)
+                "links_found": len(scoped)
                })
 
                # Add all unseen internal links to the queue to crawl later
-               for l in internal:
+               for l in scoped:
                     if l not in seen:
                          seen.add(l)
                          q.append(l)
+                         if debug:
+                              print(f"      ➕ Queued new link (scoped): {l}")
 
         # --- Handle non-HTML pages (APIs, images, etc.) ---
           else:
@@ -108,6 +144,8 @@ def main():
     p.add_argument("--target", required=True, help="Domain or URL (e.g. theCruller.com or https://theCruller.com)")
     p.add_argument("--output", default="crawl_basic.json", help="Output JSON filename")
     p.add_argument("--max-pages", type=int, default=50, help="Limit number of pages to crawl")
+    p.add_argument("--scope-file", help ="Path to allowlist regex file (one patter per line)")
+    p.add_argument("--debug", action="store_true", help="Enable debug output for verbose logging")
     args = p.parse_args()
 
     # If user gave just a domain, prepend https:// automatically
@@ -116,8 +154,9 @@ def main():
     else:
         start = "https://" + args.target
 
+    allowlist = load_allowlist(args.scope_file)
     # Run the crawl and collect results
-    out = crawl(start, max_pages=args.max_pages)
+    out = crawl(start, max_pages=args.max_pages, delay= 0.2, debug=args.debug, allowlist=allowlist)
 
     # Save output to a JSON file (pretty-printed for readability)
     with open(args.output, "w", encoding="utf-8") as f:
